@@ -1,4 +1,4 @@
-########HOMEBRIDGE HIDE########
+#######HOMEBRIDGE HIDE#######
      switch.dehumidifier:
         homebridge_hidden: true
         emulated_hue_hidden: false
