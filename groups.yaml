@@ -1,0 +1,184 @@
+  LR_view:
+    name: Living Room
+    view: yes
+    entities:
+      - group.living_room
+      - group.lr_ceiling
+      - group.living_room_media
+      - group.living_room_camera
+
+  DR_view:
+    name: Dining Room
+    view: yes
+    entities:
+      - group.dining_room
+
+  Cave_view:
+    name: Cave
+    view: yes
+    entities:
+      - group.cave
+      - group.3D_printer
+      - media_player.man_cave
+
+  Bedroom_view:
+    name: Bedroom
+    view: yes
+    entities:
+      - group.Bedroom
+
+  Pet_view:
+    name: Pets
+    view: yes
+    entities:
+      - group.Parrot
+      - group.Turtle
+
+  Automation_view:
+    name: Automation
+    view: yes
+    entities:
+      - group.all_scripts
+      - group.all_automations
+
+  Sparkle_view:
+    name: Sparkles
+    view: yes
+    entities:
+      - group.Maleficent
+      - group.Disney_Castle
+#  default_view:
+#    view: yes
+#    entities:
+#      - group.family
+#      - group.Phones
+#      - group.weather
+#      - group.all_lights
+#      - group.all_switches
+#      - scene.all_scenes
+#      - group.living_room
+#      - group.lr_ceiling
+#      - camera.living_room_camera
+
+  bedroom:
+    name: Bedroom Lights
+    entities:
+      - switch.dehumidifier
+      - light.bedroom_light
+      - light.hall_light
+
+  dining_room:
+    name: Dining Room Lights
+    entities:
+      - light.dining_room_lights
+      - light.dining_room_lamp
+
+  living_room:
+    name: Living Room Lights
+    entities:
+      - switch.side_lights
+      - scene.lr_mood_lighting
+      - scene.lr_focus_lighting
+      - scene.lr_normal_lighting
+
+  lr_ceiling:
+    name: Ceiling Lights
+    entities:
+      - light.living_room_front
+      - light.living_room_rear
+
+  cave:
+    name: Man Cave Lights
+    entities:
+      - light.cave
+      - light.cave_desk_lamp
+      - light.cave_spot_uplighter
+      - light.cave_uplighter
+      - sensor.cave_remote
+
+  3D_printer:
+    name: 3D Printer
+    entities:
+      - switch.3d_printer
+      - binary_sensor.octoprint_printing
+      - binary_sensor.octoprint_printing_error
+      - sensor.octoprint_current_state
+      - sensor.octoprint_job_percentage
+      - sensor.octoprint_target_bed_temp
+      - sensor.octoprint_actual_bed_temp
+      - sensor.octoprint_target_tool0_temp
+      - sensor.octoprint_actual_tool0_temp
+
+  living_room_media:
+    name: Media Centre
+    entities:
+      - media_player.lg_tv_living_room
+      - media_player.living_room
+      - remote.living_room
+      - sensor.lr_harmony
+
+  living_room_camera:
+    entities:
+      - camera.living_room_camera
+
+  Family:
+    entities:
+      - device_tracker.jase_iphone
+      - device_tracker.tracey_iphone
+      - device_tracker.ryan_iphone
+
+  Turtle:
+    entities:
+      - sensor.turtle_temperature
+      - sensor.basking
+      - switch.turtle_uv
+      - light.turtle_bask_dimmer
+  Parrot:
+    entities:
+      - switch.nelson_light
+      - switch.flynn_light
+
+  Weather:
+    name: Weather
+    entities:
+      - sun.sun
+      - sensor.yr_temperature
+      - sensor.yr_cloudiness
+      - sensor.yr_humidity
+      - sensor.yr_symbol
+  Remote:
+    name: remote
+    entities:
+      - remote.living_room
+      - sensor.lr_harmony
+
+  Phones:
+    name: Phones
+    entities:
+      - sensor.jase_iphone_battery_state
+      - sensor.jase_iphone_battery_level
+      - sensor.ryans_iphone_battery_state
+      - sensor.ryans_iphone_battery_level
+      - sensor.traceys_iphone_battery_state
+      - sensor.traceys_iphone_battery_level
+      - sensor.jason_whitelocks_ipad_battery_state
+      - sensor.jason_whitelocks_ipad_battery_level
+
+
+  Maleficent:
+    name: Maleficent Pop
+    entities:
+      - light.maleficent_pop
+      - input_slider.porch_animation_speed
+
+  Disney_Castle:
+    name: Disney Castle
+    entities:
+      - light.disney_castle
+      - input_slider.castle_animation_speed
+
+  Xmas_Lights:
+    name: Xmas Lights
+    entities:
+      - switch.xmas_outside_lights
+      - switch.xmas_window_lights

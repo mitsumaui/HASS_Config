@@ -1,0 +1,21 @@
+  timed_outlight:
+    alias: "Turn on outside lights for 10 minutes"
+    sequence:
+      - service: script.turn_off
+        data:
+          entity_id: script.time_off
+      - service: switch.turn_on
+        data:
+          entity_id: switch.outside_lights
+      - service: script.turn_on
+        data:
+          entity_id: script.timer_off
+
+  timer_off:
+    alias: "Turn off outside lights after 10 minutes"
+    sequence:
+      - delay:
+          minutes: 10
+      - service: switch.turn_off
+        data:
+          entity_id: switch.outside_lights

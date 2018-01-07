@@ -1,0 +1,121 @@
+########HOMEBRIDGE HIDE########
+     switch.dehumidifier:
+        homebridge_hidden: true
+        emulated_hue_hidden: false
+        icon: mdi:fan
+     switch.dining_room_lamp:
+        icon: mdi:lamp
+     switch.outside_lights:
+        icon: mdi:flashlight
+        emulated_hue_name: 'Outside Lights'
+     switch.side_lights:
+        icon: mdi:lamp
+        emulated_hue_name: 'Side Lights'
+     switch.window_lights:
+        icon: mdi:window-closed
+        emulated_hue_hidden: false
+     switch.living_room_state:
+        emulated_hue_hidden: false
+        homebridge_hidden: true
+
+     light.dining_room_lights:
+        icon: mdi:spotlight-beam
+        emulated_hue_name: 'Dining Room Light'
+     light.hall_light:
+        icon: mdi:lamp
+        emulated_hue_name: 'Hall Light'
+     group.lr_ceiling:
+        icon: mdi:spotlight-beam
+        emulated_hue_name: 'Living Room Light'
+     light.living_room_rear:
+        emulated_hue_hidden: false
+     light.living_room_front:
+        emulated_hue_hidden: false
+
+
+     light.turtle_bask_dimmer:
+        homebridge_hidden: true
+        emulated_hue_hidden: false
+        icon: mdi:fish
+     switch.turtle_uv:
+        homebridge_hidden: true
+        emulated_hue_hidden: false
+        icon: mdi:fish
+
+     switch.nelson_light:
+        homebridge_hidden: true
+        emulated_hue_hidden: false
+     switch.flynn_light:
+        homebridge_hidden: false
+        emulated_hue_hidden: false
+
+     media_player.living_room:
+        homebridge_hidden: true
+     media_player.man_cave:
+        homebridge_hidden: true
+     media_player.lg_tv_living_room:
+        homebridge_hidden: true
+
+     sensor.yr_humidity:
+        homebridge_hidden: true
+        icon: mdi:water-percent
+     sensor.yr_temperature:
+        homebridge_hidden: true
+
+     group.all_automations:
+        emulated_hue_hidden: false
+     group.all_devices:
+        emulated_hue_hidden: false
+     group.all_lights:
+        emulated_hue_hidden: false
+     group.all_remotes:
+        emulated_hue_hidden: false
+     group.all_scripts:
+        emulated_hue_hidden: false
+     group.all_switches:
+        emulated_hue_hidden: false
+     group.family:
+        emulated_hue_hidden: false
+     group.cave:
+        emulated_hue_hidden: false
+     group.cave_view:
+        emulated_hue_hidden: false
+     group.dining_room:
+        emulated_hue_hidden: false
+     group.dr_view:
+        emulated_hue_hidden: false
+     group.living_room:
+        emulated_hue_hidden: false
+     group.living_room_camera:
+        emulated_hue_hidden: false
+     group.living_room_media:
+        emulated_hue_hidden: false
+     group.lr_view:
+        emulated_hue_hidden: false
+     group.pet_view:
+        emulated_hue_hidden: false
+     group.remote:
+        emulated_hue_hidden: false
+     group.weather:
+        emulated_hue_hidden: false
+
+     sensor.basking:
+       icon: mdi:white-balance-sunny
+     sensor.turtle_temperature:
+       icon: mdi:thermometer
+     sensor.yr_cloudiness:
+       icon: mdi:cloud
+
+     scene.lr_focus_lighting:
+       emulated_hue_name: 'Living Room Focus'
+     scene.lr_mood_lighting:
+       emulated_hue_name: 'Living Room Mood Lighting'
+     scene.lr_normal_lighting:
+      emulated_hue_name: 'Living Room Normal Lighting'
+
+     zone.home:
+       track_ios: true
+       beacon:
+         uuid: FDA50693-A4E2-4FB1-AFCF-C6EB07647825
+         major: 20
+         minor: 33693

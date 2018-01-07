@@ -1,0 +1,37 @@
+- alias: Turn on outside lights when arriving home in dark
+  trigger:
+    - platform: state
+      entity_id: group.family
+      state: 'home'
+  condition:
+    - condition: state
+      entity_id: sun.sun
+      state: 'below_horizon'
+  action:
+    service: homeassistant.turn_on
+    entity_id: script.timed_outlight
+
+- alias: Turn on DR lights when away
+  trigger: 
+    platform: sun
+    event: sunset
+    offset: '-00:45:00'
+  condition:
+    - condition: state
+        entity_id: group.family
+        state: 'not_home'
+  action:
+    service: switch.turn_on
+    entity_id: switch.dining_room_lights
+
+- alias: Turn off DR lights at bedtime when away
+  trigger: 
+    - platform: time
+      after: '21:55:00'
+    condition:      
+      - condition: state
+        entity_id: group.family
+        state: 'not_home'
+    action:
+      service: switch.turn_off
+      entity_id: switch.dining_room_lights

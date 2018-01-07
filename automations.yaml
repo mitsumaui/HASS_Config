@@ -1,0 +1,205 @@
+- id: outside_lights_dark
+  alias: Turn on outside lights when arriving home in dark
+  trigger:
+  - platform: state
+    entity_id: device_tracker.jase_iphone
+    from: not_home
+    to: home
+  - platform: state
+    entity_id: device_tracker.tracey_iphone
+    from: not_home
+    to: home
+  condition:
+  - condition: state
+    entity_id: sun.sun
+    state: below_horizon
+  action:
+    service: homeassistant.turn_on
+    entity_id: script.timed_outlight
+- id: DR_lights_dark
+  alias: Turn on DR Lights at dusk
+  trigger:
+  - platform: sun
+    event: sunset
+    offset: -01:00:00
+  action:
+    service: homeassistant.turn_on
+    entity_id: light.dining_room_lights
+- id: 3D_Printer_Off_Finish
+  alias: Turn off 3D Printer after job finish
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.octoprint_printing
+    from: 'on'
+    to: 'off'
+  action:
+    service: notify.ios_jase_iphone
+    data:
+      message: 3D Printing finished!
+- id: LR_Lights_Dark_Home
+  alias: Turn on LR Lights at dusk if home
+  trigger:
+  - platform: sun
+    event: sunset
+    offset: -01:00:00
+  condition:
+  - condition: state
+    entity_id: group.family
+    state: home
+  action:
+    service: homeassistant.turn_on
+    entity_id: light.living_rooms_lights
+    data_template:
+      brightness: '255'
+- id: SCH_2145_Turtle_off
+  alias: SCH-21:45 Turn off Turtle Lights
+  trigger:
+    platform: time
+    at: '21:45:00'
+  action:
+    service: homeassistant.turn_off
+    entity_id: group.Turtle
+- id: SCH_0730_Turtle_on
+  alias: SCH-07:30 Turn on Turtle Lights
+  trigger:
+  - platform: time
+    at: 07:30:00
+  action:
+  - service: homeassistant.turn_on
+    entity_id: group.Turtle
+- id: SCH_2215_Lights_Off_Away
+  alias: Turn off Lights if not home and TV off
+  trigger:
+  - platform: time
+    at: '22:15:00'
+  condition:
+  - condition: state
+    entity_id: group.family
+    state: not_home
+  - condition: state
+    entity_id: remote.living_room
+    state: 'off'
+  action:
+  - service: homeassistant.turn_off
+    entity_id: group.all_lights
+  - service: homeassistant.turn_off
+    entity_id: group.all_switches
+- id: Turtle_Dim_Up
+  alias: Brighten turtle lamp
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.turtle_temperature
+    below: 26
+  condition:
+  - condition: state
+    entity_id: light.turtle_bask_dimmer
+    state: 'on'
+  action:
+  - service: homeassistant.turn_on
+    entity_id: light.turtle_bask_dimmer
+    data_template:
+      brightness: '{{ states.light.turtle_bask_dimmer.attributes.brightness | multiply(1.5)
+        | float | round(0) }}'
+- id: Turtle_Dim_Down
+  alias: Dim turtle lamp
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.turtle_temperature
+    above: 28
+  condition:
+  - condition: state
+    entity_id: light.turtle_bask_dimmer
+    state: 'on'
+  action:
+  - service: homeassistant.turn_on
+    entity_id: light.turtle_bask_dimmer
+    data_template:
+      brightness: '{{ states.light.turtle_bask_dimmer.attributes.brightness | multiply(0.5)
+        | float | round(0) }}'
+- id: SCH_1900_Hall_Light_On
+  alias: SCH-19:00 Turn on hall light
+  trigger:
+  - platform: time
+    at: '19:00:00'
+  condition:
+  - condition: state
+    entity_id: group.family
+    state: home
+  action:
+  - service: homeassistant.turn_on
+    entity_id: light.hall_light
+- id: SCH_2315_Hall_Light_Off
+  alias: SCH-23:15 Turn off hall light
+  trigger:
+  - platform: time
+    at: '22:15:00'
+  condition:
+  - condition: state
+    entity_id: group.family
+    state: home
+  action:
+  - service: homeassistant.turn_off
+    entity_id: light.hall_light
+- id: SCH_0840_Parrot_On
+  alias: SCH-08:40 Turn on Parrot Lights
+  trigger:
+  - platform: time
+    at: 08:40:00
+  action:
+  - service: homeassistant.turn_on
+    entity_id: group.Parrot
+- id: SCH_1930_Parrot_Off
+  alias: SCH-19:30 Turn off Parrot Lights
+  trigger:
+  - platform: time
+    at: '19:30:00'
+  action:
+  - service: homeassistant.turn_off
+    entity_id: group.Parrot
+- id: SCH_0900_Dehumidifier_On
+  alias: SCH-09:00 Turn on Dehumidifier
+  trigger:
+  - platform: time
+    at: 09:00:00
+  action:
+  - service: homeassistant.turn_on
+    entity_id: switch.dehumidifier
+- id: SCH_2045_Dehumidifier_Off
+  alias: SCH-20:45 Turn off Dehumidifier
+  trigger:
+  - platform: time
+    at: '20:45:00'
+  action:
+  - service: homeassistant.turn_off
+    entity_id: switch.dehumidifier
+- id: Cert_Renew
+  alias: Auto Renew SSH cert
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.ssl_cert_expiry
+    below: 29
+  action:
+    service: shell_command.renew_ssl
+- id: Mal_Speed
+  alias: Maleficent Pop Animation Speed
+  initial_state: true
+  hide_entity: false
+  trigger:
+  - platform: state
+    entity_id: input_slider.porch_animation_speed
+  action:
+  - service: mqtt.publish
+    data_template:
+      topic: LED/DR/set
+      payload: '{"transition":{{ trigger.to_state.state | int }}}'
+#- id: LR_Home_Dark
+#  alias: Come Home-LR Lights on Dark
+#  trigger:
+#  - entity_id: group.family
+#    from: away
+#    platform: state
+#    to: home
+#  condition:
+#  - after: sunset
+#    before: sunrise
+#    condition: sun

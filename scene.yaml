@@ -1,0 +1,35 @@
+      - name: Good Night
+        entities:
+          group.living_room: off
+          group.lr_ceiling: off
+          group.cave: off
+          group.dining_room: off
+          remote.living_room: off
+
+
+      - name: LR Mood Lighting
+        entities:
+          switch.side_lights: on
+          light.dining_room_lights: off
+          light.dining_room_lamp:
+            state: on
+            brightness: 128
+            color_temp: 450
+          group.lr_ceiling:
+            state: on
+            brightness: 64
+            color_temp: 450
+
+      - name: LR Focus Lighting
+        entities:
+          group.lr_ceiling:
+            state: on
+            brightness: 250
+            color_temp: 254
+
+      - name: LR Normal Lighting
+        entities:
+          group.lr_ceiling:
+            state: on
+            brightness: 250
+            color_temp: 370

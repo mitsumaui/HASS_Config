@@ -1,0 +1,274 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret lat
+  longitude: !secret long
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 34
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: Europe/London
+  customize: !include customize.yaml
+
+zone:
+  - name: 'Home'
+    latitude: !secret lat
+    longitude: !secret long
+    radius: 100
+
+# Enables the frontend
+frontend:
+config:
+
+http:
+  api_password: !secret http_password
+  ssl_certificate: !secret ssl_cert
+  ssl_key: !secret ssl_key
+
+# Checks for available updates
+updater:
+
+# Discover some devices automatically
+# discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time.
+history:
+  exclude:
+    domains:
+      - automation
+      - updater
+      - group
+    entities:
+        - sun.sun
+        - sensor.yr_cloudiness
+        - sensor.yr_humidity
+        - sensor.yr_symbol
+        - sensor.yr_temperature
+
+recorder:
+  purge_interval: 2
+  purge_keep_days: 30
+  exclude:
+      domains:
+        - automation
+        - updater
+      entities:
+        - sun.sun
+        - sensor.yr_cloudiness
+        - sensor.yr_humidity
+        - sensor.yr_symbol
+        - sensor.yr_temperature
+
+# View all events in a logbook
+logbook:
+
+# Track the sun
+sun:
+
+media_player:
+  - platform: webostv
+    host: !secret ip_webostv
+    mac: !secret mac_webostv
+    name: 'LG TV Living Room'
+  - platform: denonavr
+    host: !secret ip_denonavr1
+  - platform: denonavr
+    host: !secret ip_denonavr2
+
+tellduslive:
+    host: !secret ip_tdlive
+
+mqtt:
+   broker: !secret mqtt_server
+   client_id: hass
+   port: 25105
+   username: hass
+   password: !secret mqtt_pass
+   embedded:
+
+automation: !include automations.yaml
+script: !include script.yaml
+group: !include groups.yaml
+scene: !include scene.yaml
+
+emulated_hue:
+  exposed_domains:
+    - light
+    - switch
+    - group
+    - scene
+
+remote:
+  - platform: harmony
+    name: Living Room
+    host: !secret ip_harmony
+
+sensor:
+  - platform: yr
+    monitored_conditions:
+      - temperature
+      - symbol
+      - cloudiness
+      - humidity
+  - platform: mqtt
+    name: "Turtle Temperature"
+    state_topic: "sensor/turtle/temperature"
+    qos: 0
+    unit_of_measurement: "ºC"
+  - platform: template
+    sensors:
+      basking:
+        value_template: '{{ ((states.light.turtle_bask_dimmer.attributes.brightness / 255)*100)|int }}'
+        friendly_name: "Turtle Dim Level"
+        unit_of_measurement: "%"
+      lr_harmony:
+        value_template: '{{ states.remote.living_room.attributes.current_activity }}'
+        friendly_name: 'Status'
+      3dp_kwh:
+        value_template: '{% if states.switch.3d_printer %}{{ states.switch.3d_printer.attributes.current_power_w }}{% else %}Off{% endif %}'
+        friendly_name: '3D Printer Watts'
+  - platform: octoprint
+    name: Octoprint
+    monitored_conditions:
+      - Current State
+      - Temperatures
+      - Job Percentage
+  - platform: command_line
+    name: SSL cert expiry
+    unit_of_measurement: days
+    scan_interval: 10800
+    command: !secret ssl_command
+
+switch:
+#  - platform: mqtt
+#    name: "Xmas Window Lights"
+#    state_topic: "home/sonoff/S20/1/stat"
+#    command_topic: "home/sonoff/S20/1"
+#    qos: 1
+#    payload_on: "on"
+#    payload_off: "off"
+#    retain: true
+#  - platform: mqtt
+#    name: "Xmas Outside Lights"
+#    state_topic: "home/sonoff/S20/2/stat"
+#    command_topic: "home/sonoff/S20/2"
+#    qos: 1
+#    payload_on: "on"
+#    payload_off: "off"
+#    retain: true
+  - platform: mqtt
+    name: "Hall Light"
+    state_topic: "home/sonoff/S20/3/stat"
+    command_topic: "home/sonoff/S20/3"
+    qos: 1
+    payload_on: "on"
+    payload_off: "off"
+    retain: true
+
+notify:
+  - platform: webostv
+    host: !secret ip_webostv
+    name: lr_tv
+
+ios:
+
+tradfri:
+  host: !secret ip_tradfri
+
+octoprint:
+  host: !secret ip_octoprint
+  api_key: !secret octoprint_key
+
+wemo:
+  static:
+    - 192.168.167.62
+
+binary_sensor:
+  - platform: octoprint
+    monitored_conditions:
+      - Printing
+      - Printing Error
+
+shell_command:
+  renew_ssl: ~/certbot/certbot-auto renew --quiet --no-self-upgrade --standalone --preferred-challenges http-01
+
+light:
+  - platform: mqtt_json
+    name: "Maleficent Pop"
+    state_topic: "led/mal"
+    command_topic: "led/mal/set"
+    effect: true
+    effect_list:
+      - bpm
+      - candy cane
+      - confetti
+      - cyclon rainbow
+      - dots
+      - fire
+      - glitter
+      - juggle
+      - lightning
+      - noise
+      - police all
+      - police one
+      - rainbow
+      - rainbow with glitter
+      - ripple
+      - sinelon
+      - solid
+      - twinkle
+    brightness: true
+    flash: true
+    rgb: true
+    optimistic: false
+    qos: 0
+  - platform: mqtt_json
+    name: "Disney Castle"
+    state_topic: "led/castle"
+    command_topic: "led/castle/set"
+    effect: true
+    effect_list:
+      - bpm
+      - candy cane
+      - confetti
+      - cyclon rainbow
+      - dots
+      - fire
+      - glitter
+      - juggle
+      - lightning
+      - noise
+      - police all
+      - police one
+      - rainbow
+      - rainbow with glitter
+      - ripple
+      - sinelon
+      - solid
+      - twinkle
+    brightness: true
+    flash: true
+    rgb: true
+    optimistic: false
+    qos: 0
+
+input_number:
+  porch_animation_speed:
+    name: Maleficent Pop Animation Speed
+    mode: slider
+    initial: 150
+    min: 1
+    max: 150
+    step: 10
+  castle_animation_speed:
+    name: Castle Animation Speed
+    mode: slider
+    initial: 150
+    min: 1
+    max: 150
+    step: 10
