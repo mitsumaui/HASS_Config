@@ -26,6 +26,9 @@ http:
   api_password: !secret http_password
   ssl_certificate: !secret ssl_cert
   ssl_key: !secret ssl_key
+  trusted_networks:
+    - 127.0.0.1
+    - 192.168.167.20
 
 # Checks for available updates
 updater:
@@ -196,6 +199,8 @@ binary_sensor:
 
 shell_command:
   renew_ssl: ~/certbot/certbot-auto renew --quiet --no-self-upgrade --standalone --preferred-challenges http-01
+  update_config_from_github: bash /home/hass/.homeassistant/bin/update_config_from_github.sh
+  update_new_commits_sensor: bash /home/hass/.homeassistant/bin/update_new_commits_sensor.sh {{ states.sensor.password.state }}
 
 light:
   - platform: mqtt_json
