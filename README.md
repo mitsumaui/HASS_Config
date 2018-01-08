@@ -6,4 +6,4 @@ Configuration files for [Mitsumaui's](https://twitter.com/mitsumaui) [HomeAssist
 
 ## Build Status (Travis-CI)
 
-[![Build Status](hhttps://travis-ci.org/mitsumaui/HASS_Config.svg?branch=master)](https://travis-ci.org/mitsumaui/HASS_Config)
+[![Build Status](https://travis-ci.org/mitsumaui/HASS_Config.svg?branch=master)](https://travis-ci.org/mitsumaui/HASS_Config)
