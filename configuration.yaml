@@ -189,7 +189,7 @@ octoprint:
 
 wemo:
   static:
-    - 192.168.167.62
+    - !secret ip_wemo_3dp
 
 binary_sensor:
   - platform: octoprint
