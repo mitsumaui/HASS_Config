@@ -129,9 +129,9 @@ sensor:
       lr_harmony:
         value_template: '{{ states.remote.living_room.attributes.current_activity }}'
         friendly_name: 'Status'
-      3dp_kwh:
-        value_template: '{% if states.switch.3d_printer %}{{ states.switch.3d_printer.attributes.current_power_w }}{% else %}Off{% endif %}'
-        friendly_name: '3D Printer Watts'
+#      3dp_kwh:
+#        value_template: '{% if states.switch.3d_printer %}{{ states.switch.3d_printer.attributes.current_power_w }}{% else %}Off{% endif %}'
+#        friendly_name: '3D Printer Watts'
   - platform: octoprint
     name: Octoprint
     monitored_conditions:
