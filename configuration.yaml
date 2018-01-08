@@ -200,7 +200,7 @@ binary_sensor:
 shell_command:
   renew_ssl: ~/certbot/certbot-auto renew --quiet --no-self-upgrade --standalone --preferred-challenges http-01
   update_config_from_github: bash /home/hass/.homeassistant/bin/update_config_from_github.sh
-  update_new_commits_sensor: bash /home/hass/.homeassistant/bin/update_new_commits_sensor.sh {{ states.sensor.password.state }}
+  update_new_commits_sensor: bash /home/hass/.homeassistant/bin/update_new_commits_sensor.sh
 
 light:
   - platform: mqtt_json
