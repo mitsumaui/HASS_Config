@@ -4,7 +4,7 @@ u = miniupnpc.UPnP()
 u.discoverdelay=200;u.discover();u.selectigd()
 
 import sys
-if len(sys.argv) != 1:
+if len(sys.argv) != 2:
     sys.stderr.write("Syntax: certbot_upnp [add]/[remove]")
     sys.exit(1)
 
