@@ -26,7 +26,7 @@
         emulated_hue_name: 'Hall Light'
      group.lr_ceiling:
         icon: mdi:spotlight-beam
-        emulated_hue_name: 'Living Room Light'
+        emulated_hue_name: 'Living Room Lights'
      light.living_room_rear:
         emulated_hue_hidden: false
      light.living_room_front:
