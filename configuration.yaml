@@ -198,7 +198,7 @@ binary_sensor:
       - Printing Error
 
 shell_command:
-  renew_ssl: bash ~/certbot/certbot-auto renew --quiet --no-self-upgrade --standalone --preferred-challenges tls-sni-01 --tls-sni-01-port 8124
+  renew_ssl: bash /home/hass/.homeassistant/bin/cert_renew.sh
   update_config_from_github: bash /home/hass/.homeassistant/bin/update_config_from_github.sh
   update_new_commits_sensor: bash /home/hass/.homeassistant/bin/update_new_commits_sensor.sh
 
