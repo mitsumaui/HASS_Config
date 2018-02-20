@@ -282,10 +282,9 @@ google_assistant:
   project_id: !secret gh_project
   client_id: !secret gh_client_id
   access_token: !secret gh_access_token
-  agent_user_id: !secret gh_user_id
-  api_key: !secret gh_api_key
+#  agent_user_id: !secret gh_user_id
+#  api_key: !secret gh_api_key
   exposed_domains:
     - switch
     - light
-    - group
     - scene
