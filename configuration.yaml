@@ -34,10 +34,13 @@ http:
 updater:
 
 # Discover some devices automatically
-# discovery:
+discovery:
 
 # Allows you to issue voice commands from the frontend in enabled browsers
 conversation:
+
+homekit:
+
 
 # Enables support for tracking state changes over time.
 history:
@@ -139,7 +142,6 @@ sensor:
     name: Octoprint
     monitored_conditions:
       - Current State
-      - Temperatures
       - Job Percentage
   - platform: command_line
     name: SSL cert expiry
@@ -278,13 +280,13 @@ input_number:
     max: 150
     step: 10
 
-google_assistant:
-  project_id: !secret gh_project
-  client_id: !secret gh_client_id
-  access_token: !secret gh_access_token
+#google_assistant:
+#  project_id: !secret gh_project
+#  client_id: !secret gh_client_id
+#  access_token: !secret gh_access_token
 #  agent_user_id: !secret gh_user_id
 #  api_key: !secret gh_api_key
-  exposed_domains:
-    - switch
-    - light
-    - scene
+#  exposed_domains:
+#    - switch
+#    - light
+#    - scene
