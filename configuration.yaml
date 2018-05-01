@@ -40,6 +40,7 @@ discovery:
 conversation:
 
 homekit:
+cloud:
 
 
 # Enables support for tracking state changes over time.
