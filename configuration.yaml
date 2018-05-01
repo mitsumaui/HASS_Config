@@ -40,8 +40,37 @@ discovery:
 conversation:
 
 homekit:
-cloud:
+  filter:
+    include_entities:
+      - group.lr_ceiling
+    exclude_domains:
+      - automation
+      - group
+      - sensor
+      - script
+      - input_boolean
 
+cloud:
+  alexa:
+    filter:
+      include_entities:
+        - group.lr_ceiling
+      exclude_domains:
+        - automation
+        - group
+        - sensor
+        - script
+        - input_boolean
+  google_actions:
+    filter:
+      include_entities:
+        - group.lr_ceiling
+      exlude_domains:
+        - automation
+        - group
+        - sensor
+        - script
+        - input_boolean
 
 # Enables support for tracking state changes over time.
 history:
@@ -103,12 +132,12 @@ script: !include script.yaml
 group: !include groups.yaml
 scene: !include scene.yaml
 
-emulated_hue:
-  exposed_domains:
-    - light
-    - switch
-    - group
-    - scene
+# emulated_hue:
+#   exposed_domains:
+#     - light
+#     - switch
+#     - group
+#     - scene
 
 remote:
   - platform: harmony
