@@ -65,7 +65,7 @@ cloud:
     filter:
       include_entities:
         - group.lr_ceiling
-      exlude_domains:
+      exclude_domains:
         - automation
         - group
         - sensor
