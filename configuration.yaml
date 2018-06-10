@@ -235,6 +235,8 @@ shell_command:
   update_new_commits_sensor: bash /home/hass/.homeassistant/bin/update_new_commits_sensor.sh
 
 light:
+  - platform: lw12wifi
+    host: 192.168.167.16
   - platform: mqtt_json
     name: "Maleficent Pop"
     state_topic: "led/mal"
